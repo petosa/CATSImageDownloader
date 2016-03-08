@@ -7,6 +7,7 @@ public class Worker implements Runnable {
 
     private String url;
     private String query;
+    private String encodedQuery;
     private String category;
     private boolean isAmb;
     private String source;
@@ -16,8 +17,9 @@ public class Worker implements Runnable {
 
     public Worker(String q, String d) {
         query = q;
+        encodedQuery = q.replace(" ", "%20");
         directory = d;
-        url = "https://www.google.com/search?q=" + query +"&tbm=isch";
+        url = "https://www.google.com/search?q=" + encodedQuery +"&tbm=isch";
     }
 
     public Worker(String q, String c, String d) {
@@ -36,7 +38,7 @@ public class Worker implements Runnable {
             isAmb = source.contains("class=\"_OQi\"");
             if (isAmb) {
                 //Add category to query for greater specificity
-                url = "https://www.google.com/search?q=" + query + "%20" + category + "&tbs=itp:photo,isz:lt,islt:xga&tbm=isch";
+                url = "https://www.google.com/search?q=" + encodedQuery + "%20" + category + "&tbs=itp:photo,isz:lt,islt:xga&tbm=isch";
                 updateSource();
             }
         }
@@ -59,7 +61,7 @@ public class Worker implements Runnable {
 
         //Set to uncategorized if no category
         if(category == null) {
-            category = "Uncategorized";
+            category = "uncategorized";
         }
 
         //Change directory
