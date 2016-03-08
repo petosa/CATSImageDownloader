@@ -23,3 +23,9 @@ A lot of times, a query is ambiguous. For example, `crane` can either be an anim
 `crane : construction`
 
 ![Alt text](https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSiv_Uia5zhGEFkeO3ovVckteH1XLFhBoxhtxnkkY_Hz05PfijG "crane : construction")
+
+## Recursive Error Resolution
+Some images just can't be downloaded due to 404's or 403's. To resolve this, another thread is started with instructions to download the subsequent image result. This redundancy more or less guarantees a result for each query.
+
+## Multithreaded Downloads
+Images for each query are downloaded concurrently.
