@@ -18,10 +18,8 @@ A lot of times, a query is ambiguous. For example, `crane` can either be an anim
 
 `crane : animal`
 
-![alt text][logo]
-[logo]: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaBFnG0WII2bkKZj-oyX-hvl19MzbZF4k8tPzm3OG-C5eE0GdY "crane : animal"
+![Alt text](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaBFnG0WII2bkKZj-oyX-hvl19MzbZF4k8tPzm3OG-C5eE0GdY "crane : animal")
 
 `crane : construction`
 
-![alt text][logo]
-[logo]: https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSiv_Uia5zhGEFkeO3ovVckteH1XLFhBoxhtxnkkY_Hz05PfijG "crane : construction"
+![Alt text](https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSiv_Uia5zhGEFkeO3ovVckteH1XLFhBoxhtxnkkY_Hz05PfijG "crane : construction")
