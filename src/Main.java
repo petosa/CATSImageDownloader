@@ -1,9 +1,8 @@
-import java.util.HashSet;
 
 public class Main {
 
     public static void main(String[] args) {
-        String[] animals = {"Panda",
+        String[] items = {"Panda",
                 "Cat",
                 "Whale",
                 "Apple",
@@ -49,7 +48,7 @@ public class Main {
                 "Egg",
                 "Chocolate",
                 "Knife"};
-        for (String s : animals) {
+        for (String s : items) {
             Worker w = new Worker(s, "D:\\Code\\Dev\\CATS");
             Thread t = new Thread(w);
             t.start();
