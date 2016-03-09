@@ -7,11 +7,22 @@ Run the compiled jar like so:
 ## Image Downloader
 Given a text file of queries, download an iconic image for that word. Images are all photos greater than 1024 x 768. Optionally, provide a category for each query to improve accuracy and for automatic sorting in the export directory. Text files should be formatted like so:
 ```
-dog : animal
-ice cream : food
-electricity
+entrance     //With no categories specified, this query is in the default uncategorized category
+smile    //Same for this query
+@animal      //Apply animal category to the subsequent queries
+axolotl
+buffalo
+@food        //Apply food category to the subsequent queries
+dumpling
+spring onion
+@           //Reset category to uncategorized for subsequent queries
+shoe laces
+time
 ```
-Notice how `electricity` does not have a category.
+Notice how `axolotl` and `buffalo` are in the `animal` category, `dumpling` and `spring onion` are in the `food` category, and `entrance`, `smile`, `shoe laces`, and `time` are in the default uncategorized category.
+
+![Alt text](http://i.imgur.com/cJSikDH.png "categories")
+
 
 ## Ambiguity Resolution
 A lot of times, a query is ambiguous. For example, `crane` can either be an animal or can be used in `construction`. Such ambiguous queries are automatically detected. So long as you have set categories for ambiguous queries, the correct image will be downloaded.
