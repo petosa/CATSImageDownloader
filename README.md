@@ -3,6 +3,9 @@ Thumbnail image downloader for Georgia Tech's Center for Accessible Technology i
 Run the compiled jar like so:
 `java -jar CATSImageDownloader list-of-queries.txt export-directory`
 
+Download the latest release:
+https://github.com/petosa/CATSImageDownloader/releases
+
 # Features
 ## Image Downloader
 Given a text file of queries, download an iconic image for that word. Images are all photos greater than 1024 x 768. Optionally, provide a category for each query to improve accuracy and for automatic sorting in the export directory. Text files should be formatted like so:
