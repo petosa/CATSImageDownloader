@@ -8,14 +8,14 @@ Run the compiled jar like so:
 Given a text file of queries, download an iconic image for that word. Images are all photos greater than 1024 x 768. Optionally, provide a category for each query to improve accuracy and for automatic sorting in the export directory. Text files should be formatted like so:
 ```
 entrance     //With no categories specified, this query is in the default uncategorized category
-smile    //Same for this query
+smile        //Same for this query
 @animal      //Apply animal category to the subsequent queries
 axolotl
 buffalo
 @food        //Apply food category to the subsequent queries
 dumpling
 spring onion
-@           //Reset category to uncategorized for subsequent queries
+@            //Reset category to uncategorized for subsequent queries
 shoe laces
 time
 ```
