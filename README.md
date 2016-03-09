@@ -28,7 +28,7 @@ Notice how `axolotl` and `buffalo` are in the `animal` category, `dumpling` and 
 
 
 ## Ambiguity Resolution
-A lot of times, a query is ambiguous. For example, `crane` can either be an animal or can be used in `construction`. Such ambiguous queries are automatically detected. So long as you have set categories for ambiguous queries, the correct image will be downloaded.
+A lot of times, a query is ambiguous. For example, `crane` can either be an `animal` or can be used in `construction`. Such ambiguous queries are automatically detected. So long as you have set categories for ambiguous queries, the correct image will be downloaded.
 
 `crane : animal`
 
