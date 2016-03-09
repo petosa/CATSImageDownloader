@@ -1,57 +1,46 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Main {
 
     public static void main(String[] args) {
-        String[] items = {"Panda",
-                "Cat",
-                "Whale",
-                "Apple",
-                "Chicken",
-                "Bed",
-                "Tiger",
-                "Rabbit",
-                "Sofa",
-                "Dolphin",
-                "Dog",
-                "Fork",
-                "Bottle",
-                "Cow",
-                "Lion",
-                "Turtle",
-                "Carrots",
-                "Rat",
-                "Zebra",
-                "Spoon",
-                "Crow",
-                "Dove",
-                "Tomato",
-                "Orange",
-                "Giraffe",
-                "Phone",
-                "Fish",
-                "Beef",
-                "Computer",
-                "Bread",
-                "Spectacles",
-                "Fridge",
-                "Plate",
-                "Rhino",
-                "Brocolli",
-                "Bananas",
-                "Drawer",
-                "Sheep",
-                "Shark",
-                "Milk",
-                "Lamp",
-                "Squirrel",
-                "Hamster",
-                "Egg",
-                "Chocolate",
-                "Knife"};
-        for (String s : items) {
-            Worker w = new Worker(s, "D:\\Code\\Dev\\CATS");
-            Thread t = new Thread(w);
-            t.start();
+        //Get input from command.
+        String textFile = args[0];
+        String directory = args[1];
+
+        //Parse text file.
+        String category = null;
+        String st = null;
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader(textFile));
+
+        while ((st=br.readLine()) != null) {
+            //Case: line sets category.
+            if(st.charAt(0) == '@') {
+                if(st.length() == 1) {
+                    category = null;
+                } else {
+                    category = st.substring(1);
+                }
+            //Case: normal query, launch a new thread to download.
+            } else {
+                Worker w = null;
+                if (category == null) {
+                    w = new Worker(st, directory);
+                } else {
+                    w = new Worker(st, category, directory);
+                }
+                Thread t = new Thread(w);
+                t.start();
+            }
+        }
+        } catch (FileNotFoundException e) {
+            System.err.println("Can't find specified text file.");
+        } catch (IOException e) {
+            System.err.println("There's something wrong with your text file.");
         }
     }
 

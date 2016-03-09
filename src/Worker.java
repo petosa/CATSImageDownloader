@@ -92,14 +92,17 @@ public class Worker implements Runnable {
         try {
             saveImage(imgURL, directory);
         } catch (IOException e) {
+            //Recursive error resolution.
             System.err.println("Something went wrong when downloading the image for " + query + ". Recursively retrying...");
             Worker w = null;
+            //Increment imgIndex with same query..
             if(category == null) {
                 w = new Worker(query, directoryOrig, imgIndex + 1);
 
             } else {
                 w = new Worker(query, category, directoryOrig, imgIndex + 1);
             }
+            //Launch thread.
             Thread t = new Thread(w);
             t.start();
         }
