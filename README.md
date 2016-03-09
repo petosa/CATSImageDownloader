@@ -1,5 +1,5 @@
 # CATSImageDownloader
-Thumbnail image downloader for Georgia Tech's Center for Accessible Technology in Sign (CATS) SMARTSignDictionary 
+Thumbnail image downloader for Georgia Tech's Center for Accessible Technology in Sign (CATS) SMARTSignDictionary.
 Run the compiled jar like so:
 `java -jar CATSImageDownloader list-of-queries.txt export-directory`
 
@@ -8,7 +8,7 @@ https://github.com/petosa/CATSImageDownloader/releases
 
 # Features
 ## Image Downloader
-Given a text file of queries, download an iconic image for that word. Images are all photos greater than 1024 x 768. Optionally, provide a category for each query to improve accuracy and for automatic sorting in the export directory. Text files should be formatted like so:
+Given a text file of queries, download an iconic image for that word. Images are all photos greater than 1024 x 768. All photos are scraped from Google Images. Optionally, provide a category for each query to improve accuracy and for automatic sorting in the export directory. Text files should be formatted like so:
 ```
 entrance     //With no categories specified, this query is in the default uncategorized category
 smile        //Same for this query
