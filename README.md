@@ -1,21 +1,24 @@
 # CATSImageDownloader
-Thumbnail image downloader for Georgia Tech's Center for Accessible Technology in Sign (CATS) SMARTSignDictionary 
+Thumbnail image downloader for Georgia Tech's Center for Accessible Technology in Sign (CATS) SMARTSignDictionary.
 Run the compiled jar like so:
 `java -jar CATSImageDownloader list-of-queries.txt export-directory`
 
+Download the latest release:
+https://github.com/petosa/CATSImageDownloader/releases
+
 # Features
 ## Image Downloader
-Given a text file of queries, download an iconic image for that word. Images are all photos greater than 1024 x 768. Optionally, provide a category for each query to improve accuracy and for automatic sorting in the export directory. Text files should be formatted like so:
+Given a text file of queries, download an iconic image for that word. Images are all photos greater than 1024 x 768. All photos are scraped from Google Images. Optionally, provide a category for each query to improve accuracy and for automatic sorting in the export directory. Text files should be formatted like so:
 ```
 entrance     //With no categories specified, this query is in the default uncategorized category
-smile    //Same for this query
+smile        //Same for this query
 @animal      //Apply animal category to the subsequent queries
 axolotl
 buffalo
 @food        //Apply food category to the subsequent queries
 dumpling
 spring onion
-@           //Reset category to uncategorized for subsequent queries
+@            //Reset category to uncategorized for subsequent queries
 shoe laces
 time
 ```
@@ -25,7 +28,7 @@ Notice how `axolotl` and `buffalo` are in the `animal` category, `dumpling` and 
 
 
 ## Ambiguity Resolution
-A lot of times, a query is ambiguous. For example, `crane` can either be an animal or can be used in `construction`. Such ambiguous queries are automatically detected. So long as you have set categories for ambiguous queries, the correct image will be downloaded.
+A lot of times, a query is ambiguous. For example, `crane` can either be an `animal` or can be used in `construction`. Such ambiguous queries are automatically detected. So long as you have set categories for ambiguous queries, the correct image will be downloaded.
 
 `crane : animal`
 
