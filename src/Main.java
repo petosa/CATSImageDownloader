@@ -53,7 +53,6 @@ public class Main {
         } catch (IOException e) {
              System.err.println("There's something wrong with your text file.");
         }
-        System.out.println("Complete!");
     }
 
 }

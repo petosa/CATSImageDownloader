@@ -96,7 +96,7 @@ public class Worker implements Runnable {
         //Download image from url to file.
         try {
             saveImage(imgURL, directory);
-            System.out.println("Downloaded: " + query + " from " + imgURL + ".");
+            System.out.println("Downloaded: " + query + ".");
             if(!checkIntegrity(directory)) {
                 throw new IOException();
             }
