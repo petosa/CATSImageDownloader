@@ -1,3 +1,8 @@
+import sun.awt.image.FileImageSource;
+import sun.awt.image.ImageFormatException;
+import sun.awt.image.JPEGImageDecoder;
+
+import javax.activation.MimetypesFileTypeMap;
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
@@ -26,7 +31,7 @@ public class Worker implements Runnable {
         encodedQuery = q.replace(" ", "%20");
         directory = d;
         directoryOrig = d;
-        url = "https://www.google.com/search?q=" + encodedQuery +"&tbm=isch";
+        url = "https://www.google.com/search?q=" + encodedQuery +"&tbs=itp:photo,isz:lt,islt:xga&tbm=isch";
         imgIndex = i;
     }
 
@@ -91,6 +96,10 @@ public class Worker implements Runnable {
         //Download image from url to file.
         try {
             saveImage(imgURL, directory);
+            System.out.println("Downloaded: " + query + " from " + imgURL + ".");
+            if(!checkIntegrity(directory)) {
+                throw new IOException();
+            }
         } catch (IOException e) {
             //Recursive error resolution.
             System.err.println("Something went wrong when downloading the image for " + query + ". Recursively retrying...");
@@ -144,6 +153,21 @@ public class Worker implements Runnable {
         os.close();
     }
 
+    //Check if the downloaded jpg is corrupt.
+    private boolean checkIntegrity(String path) {
+        try {
+            JPEGImageDecoder decoder = new JPEGImageDecoder(new FileImageSource(path), new FileInputStream(path));
+            decoder.produceImage();
+        } catch (ImageFormatException ife) {
+            return false;
+        } catch (FileNotFoundException e) {
+            System.err.println("Something broke in the integrity checker.");
+        } catch (IOException e) {
+            System.err.println("Something broke in the integrity checker.");
+        }
+        return true;
+    }
+
     //Return source for URL specified by u.
     private String downloadSource(String u) throws IOException {
 
@@ -152,10 +176,22 @@ public class Worker implements Runnable {
         connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
         connection.connect();
 
-        //Save stream to string
-        BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        String ret = br.lines().collect(Collectors.joining("\n"));
-        br.close();
+        BufferedReader br = null;
+        String ret = null;
+        try {
+            //Save stream to string
+            br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            ret = br.lines().collect(Collectors.joining("\n"));
+
+        } catch (IOException ioe) {
+            if (ioe.toString().contains("503")) {
+                System.err.println("Google detected our bot and is refusing connections.");
+                ioe.printStackTrace();
+                System.exit(0);
+            }
+        } finally {
+            br.close();
+        }
 
         return ret;
     }
