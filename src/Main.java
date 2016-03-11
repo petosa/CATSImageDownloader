@@ -24,7 +24,7 @@ public class Main {
             br = new BufferedReader(new FileReader(textFile));
             System.out.println("Text file parsed. Beginning downloads...");
 
-            //Create thread pool of size 1
+            //Create thread pool of size 5
             ExecutorService executor = Executors.newFixedThreadPool(5);
 
             while ((st=br.readLine()) != null) {
