@@ -2,7 +2,6 @@ import sun.awt.image.FileImageSource;
 import sun.awt.image.ImageFormatException;
 import sun.awt.image.JPEGImageDecoder;
 
-import javax.activation.MimetypesFileTypeMap;
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
@@ -69,16 +68,16 @@ public class Worker implements Runnable {
             }
         }
 
-        //Find Nth occurence of "imgurl="
-        int index = source.indexOf("imgurl=") + 7;
+        //Find Nth occurence of "ou":"
+        int index = source.indexOf("\"ou\":\"") + 6;
         for (int x = 0; x < imgIndex; x++) {
             source = source.substring(index);
-            index = source.indexOf("imgurl=") + 7;
+            index = source.indexOf("\"ou\":\"") + 6;
         }
 
         //Build imgURL
         imgURL = "";
-        while(source.charAt(index) != '&') {
+        while(source.charAt(index) != '\"') {
             imgURL += source.charAt(index);
             index++;
         }
