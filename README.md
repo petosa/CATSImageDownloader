@@ -1,7 +1,7 @@
 # CATSImageDownloader
 Thumbnail image downloader for Georgia Tech's Center for Accessible Technology in Sign (CATS) SMARTSignDictionary.
 Run the compiled jar like so:
-`java -jar CATSImageDownloader list-of-queries.txt export-directory`
+`java -jar CATSImageDownloader /path/to/list.txt /path/to/export-directory`
 
 Download the latest release:
 https://github.com/petosa/CATSImageDownloader/releases
@@ -39,7 +39,7 @@ A lot of times, a query is ambiguous. For example, `crane` can either be an `ani
 ![Alt text](https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSiv_Uia5zhGEFkeO3ovVckteH1XLFhBoxhtxnkkY_Hz05PfijG "crane : construction")
 
 ## Recursive Error Resolution
-Some images just can't be downloaded due to 404's or 403's. To resolve this, another thread is started with instructions to download the subsequent image result. This redundancy more or less guarantees a result for each query.
+Some images just can't be downloaded due to 404's or 403's. Even once downloaded, some files are corrupt. To resolve this, another thread is started with instructions to download the subsequent image result. This redundancy more or less guarantees a result for each query.
 
 ## Multithreaded Downloads
-Images for each query are downloaded concurrently.
+Images for each query are downloaded concurrently, currently up to 5 at a time.
