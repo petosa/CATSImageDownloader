@@ -2,6 +2,9 @@ import sun.awt.image.FileImageSource;
 import sun.awt.image.ImageFormatException;
 import sun.awt.image.JPEGImageDecoder;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
@@ -99,14 +102,13 @@ public class Worker implements Runnable {
             if(!checkIntegrity(directory)) {
                 throw new IOException();
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             //Recursive error resolution.
             System.err.println("Something went wrong when downloading the image for " + query + ". Recursively retrying...");
             Worker w = null;
             //Increment imgIndex with same query..
             if(category == null) {
                 w = new Worker(query, directoryOrig, imgIndex + 1);
-
             } else {
                 w = new Worker(query, category, directoryOrig, imgIndex + 1);
             }
@@ -136,20 +138,21 @@ public class Worker implements Runnable {
         connection.connect();
 
         //Open streams.
-        InputStream is = connection.getInputStream();
-        OutputStream os = new FileOutputStream(d);
+        InputStream is = new BufferedInputStream(connection.getInputStream());
 
-        //Download and save bytes.
-        byte[] b = new byte[2048];
-        int length;
-
-        while ((length = is.read(b)) != -1) {
-            os.write(b, 0, length);
+        BufferedImage buff = ImageIO.read(is);
+        //Resize to fit within 1280x720
+        //buff = resize(buff);
+        File out = new File(d);
+        ImageIO.write(buff, "jpg", out);
+        //Check if 2M is exceeded
+        long len = out.length();
+        if(len > 2000000L) {
+            System.out.println(d + " is too large (" + out.length() + " bytes)");
+            throw new IOException("File too large");
         }
-
         //Clean up.
         is.close();
-        os.close();
     }
 
     //Check if the downloaded jpg is corrupt.
